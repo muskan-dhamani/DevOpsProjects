@@ -7,3 +7,4 @@ Steps:
 4. CREATE TABLE test_table (id SERIAL PRIMARY KEY, data TEXT);
 INSERT INTO test_table (data) VALUES ('Hello from Docker Compose!');
 5. Visit http://localhost:5000 again.
+6. docker-compose down
