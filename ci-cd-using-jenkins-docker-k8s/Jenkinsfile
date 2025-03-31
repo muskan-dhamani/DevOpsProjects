@@ -29,18 +29,21 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    sh "kubectl apply -f k8s/deployment.yaml"
+                    try {
+                        sh "kubectl apply -f k8s/deployment.yaml"
+                    } catch (err) {
+                        error "Kubernetes deployment failed: ${err}"
+                    }
                 }
             }
         }
     }
     post {
         success {
-            echo 'Pipeline completed successfully!'
+            echo '✅ Pipeline completed successfully!'
         }
         failure {
-            echo 'Pipeline failed.'
+            echo '❌ Pipeline failed.'
         }
     }
 }
-
